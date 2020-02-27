@@ -20,9 +20,15 @@
 		size="18px"
 		/>
 		 <q-item-section side top>
-          <q-item-label caption>{{ task.dueDate }}</q-item-label>
-		   <q-item-label caption><small>{{ task.dueTime }}</small></q-item-label>
+			 <div class="row"> 
+				 <div class="col">
+					<q-item-label caption>{{ task.dueDate }}</q-item-label>
+		   			<q-item-label caption><small>{{ task.dueTime }}</small></q-item-label>
+				 </div>
+				 </div>
         </q-item-section>
+		
+         
       </q-item>
  </q-list>
   </q-page>
