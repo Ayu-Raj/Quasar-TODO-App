@@ -13,25 +13,43 @@
 		  :class="{ 'text-strikethrough': task.completed }"
 		  >{{ task.name }}</q-item-label>
         </q-item-section>
-		<q-icon 
+		
+		 <q-item-section
+     v-if="task.dueDate"
+      side >
+			 <div class="row"> 
+				 <div class="column justify-center">
+           <q-icon 
 		name="event"
 		size="18px"
 		/>
-		 <q-item-section side top>
-			 <div class="row"> 
-				 <div class="col">
+    <q-space />
+				 </div>
+          <div class="column justify-end">
 					<q-item-label caption>{{ task.dueDate }}</q-item-label>
 		   			<q-item-label caption><small>{{ task.dueTime }}</small></q-item-label>
 				 </div>
-				 </div>
+				</div>
         </q-item-section>
          
 		 <q-item-section side top>
-			<q-btn 
+       <div class="row">
+        <q-btn 
+            @click.stop="showEditTask = true"
+            flat round dense color="primary" icon="edit" />
+        <q-btn 
             @click.stop="promptToDelete(id)"
             flat round dense color="red" icon="delete" />
-        </q-item-section>
-		
+
+       </div>
+			
+    </q-item-section>
+		<q-dialog v-model="showEditTask">
+<edit-task 
+:task="task"
+:id="id"
+@close="showEditTask= false" />
+</q-dialog>
          
       </q-item>
 </template>
@@ -41,6 +59,11 @@
 
 export default {
     props: ['task', 'id'],
+    data() {
+      return {
+        showEditTask: false
+      }
+    },
     methods: {
         ...mapActions('tasks', ['updateTask', 'deleteTask']),
         promptToDelete(id) {
@@ -53,6 +76,9 @@ export default {
         this.deleteTask(id)
       })
         }
+    },
+    components: {
+      'edit-task': require('components/Tasks/Modals/EditTask.vue').default
     }
 }
 </script>
