@@ -43,10 +43,10 @@ module.exports = function (ctx) {
       all: 'auto',
 
       components: [
-        'QDialog'
+       
       ],
       directives: [
-        'ClosePopup'
+      
       ],
 
       // Quasar plugins

@@ -51,15 +51,34 @@ const actions = {
         let payload = {
             id: taskId,
             task: task
-        }
+        } 
         commit('addTask', payload);
     }
 }
 
 const getters = {
-    tasks: (state) => {
-        return state.tasks
-    }
+    tasksTodo: (state) => {
+        let tasks = {}
+        Object.keys(state.tasks).forEach(function (key) {
+            let task = state.tasks[key]
+            console.log(task)
+            if(!task.completed){
+                tasks[key]=task
+            }
+        })
+        return tasks
+    },
+    tasksCompleted: (state) => {
+        let tasks = {}
+        Object.keys(state.tasks).forEach(function (key) {
+            let task = state.tasks[key]
+            console.log(task)
+            if(task.completed){
+                tasks[key]=task
+            }
+        })
+        return tasks
+    },
 }
 
 export default {
